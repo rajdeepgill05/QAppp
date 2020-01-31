@@ -1,0 +1,26 @@
+﻿@model IEnumerable<QApp.Models.CommentsOnQuestion>
+@{
+    Layout = null;
+}
+<div>
+  
+
+    @foreach (var item in Model)
+    {
+    <div>
+        <span>
+            @Html.DisplayFor(modelItem => item.Text)
+        </span><br />
+        <span>
+            CreatedBy
+            @Html.DisplayFor(modelItem => item.User.UserName)
+        </span>
+        <span>
+            @Html.DisplayFor(modelItem => item.Created)
+        </span>
+
+    </div>
+    }
+
+</div>
+

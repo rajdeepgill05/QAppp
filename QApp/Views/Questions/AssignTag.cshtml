@@ -1,0 +1,79 @@
+﻿@model QApp.Models.Question
+
+<div>
+    <h4>Tags</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+    </dl>
+
+
+
+
+</div>
+<div>
+    @foreach (var selectedTag in @ViewBag.SelectedTags)
+    {
+        <div>
+            @selectedTag
+        </div>
+    }
+
+</div>
+
+<p>
+    @using (Html.BeginForm("AssignTagConfirm", "Questions", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken();
+        <div>
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.DropDownList("TagId", new SelectList(@ViewBag.Tags, "Id", "Category", "Id"), "Select Tag")
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Add Tag" class="btn btn-default" />
+                </div>
+            </div>
+
+
+        </div>
+
+
+    }
+</p>
+<div class="col-md-offset-2 col-md-10">
+    <p>"Do not Have the required Tag in the DropDown List.<br> Click the Link Below to Create One" </p>
+    <span class="btn btn-default">
+        @Html.ActionLink("Create Tag", "Create", "Tags")
+    </span>
+</div>
+<span class="btn btn-default">
+    @Html.ActionLink("Continue", "Index", "Questions")
+</span>
